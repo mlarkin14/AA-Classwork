@@ -4,8 +4,9 @@ require 'singleton'
 class Piece
   attr_reader :symbol 
   attr_accessor :current_pos
-  def initialize(start_pos, board)
+  def initialize(start_pos, color, board)
     @current_pos = start_pos
+    @color = color
     @board = board
     # take out once pieces are set
      # change at each class to its specific symbol
@@ -79,7 +80,7 @@ end
 
 class Bishop < Piece
   include SlidingPiece
-  def initialize(start_pos, board)
+  def initialize(start_pos, color, board)
     super
     @symbol = :BP
   end
@@ -88,7 +89,7 @@ end
 
 class Rook < Piece
   include SlidingPiece
-  def initialize(start_pos, board)
+  def initialize(start_pos, color, board)
     super
     @symbol = :RK
   end
@@ -96,7 +97,7 @@ end
 
 class Queen < Piece
   include SlidingPiece
-  def initialize(start_pos, board)
+  def initialize(start_pos, color, board)
     super
     @symbol = :QN
   end
@@ -104,7 +105,7 @@ end
 
 class Knight < Piece
   include SteppingPiece
-  def initialize(start_pos, board)
+  def initialize(start_pos, color, board)
     super
     @symbol = :KT
   end
@@ -112,14 +113,14 @@ end
 
 class King < Piece
   include SteppingPiece
-  def initialize(start_pos, board)
+  def initialize(start_pos, color, board)
     super
     @symbol = :KG
   end
 end
 
 class Pawn < Piece
-  def initialize(start_pos, board)
+  def initialize(start_pos, color, board)
     super
     @symbol = :PN
   end # call super from piece and check if pawn has moved from start positions

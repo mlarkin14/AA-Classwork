@@ -7,6 +7,11 @@ class Board
   class PieceMoveError < StandardError; end
 
   attr_reader :rows
+  
+  COLOR = [
+            :black,
+            :white
+          ]
 
 
   def initialize
@@ -50,30 +55,30 @@ class Board
   
   def fill_board # should this be a factory method? Why? Think instance is fine.
     # debugger
-    rows[0][0] = Rook.new([0, 0], self)
-    rows[0][1] = Knight.new([0, 1], self)
-    rows[0][2] = Bishop.new([0, 2], self)
-    rows[0][3] = King.new([0, 3], self)
-    rows[0][4] = Queen.new([0, 4], self)
-    rows[0][5] = Bishop.new([0, 5], self)
-    rows[0][6] = Knight.new([0, 6], self)
-    rows[0][7] = Rook.new([0, 7], self)
-    rows[1].map!.with_index { |pos, idx| pos = Pawn.new([1, idx], self) }
+    rows[0][0] = Rook.new([0, 0], COLOR[0], self)
+    rows[0][1] = Knight.new([0, 1], COLOR[0], self)
+    rows[0][2] = Bishop.new([0, 2], COLOR[0], self)
+    rows[0][3] = King.new([0, 3], COLOR[0], self)
+    rows[0][4] = Queen.new([0, 4], COLOR[0], self)
+    rows[0][5] = Bishop.new([0, 5], COLOR[0], self)
+    rows[0][6] = Knight.new([0, 6], COLOR[0], self)
+    rows[0][7] = Rook.new([0, 7], COLOR[0], self)
+    rows[1].map!.with_index { |pos, idx| pos = Pawn.new([1, idx], COLOR[0], self) }
     
     # rows[2..5].each_index do |idx|
     #   idx += 2 # since 1 NullClass, push into array the positions in this area?
     #   rows[idx].map! { |pos| pos = null_piece.symbol }
     # end
     
-    rows[6].map!.with_index { |pos, idx| pos = Pawn.new([6, idx], self) }
-    rows[7][0] = Rook.new([7, 0], self)
-    rows[7][1] = Knight.new([7, 1], self)
-    rows[7][2] = Bishop.new([7, 2], self)
-    rows[7][3] = King.new([7, 3], self)
-    rows[7][4] = Queen.new([7, 4], self)
-    rows[7][5] = Bishop.new([7, 5], self)
-    rows[7][6] = Knight.new([7, 6], self)
-    rows[7][7] = Rook.new([7, 7], self)
+    rows[6].map!.with_index { |pos, idx| pos = Pawn.new([6, idx], COLOR[1], self) }
+    rows[7][0] = Rook.new([7, 0], COLOR[1], self)
+    rows[7][1] = Knight.new([7, 1], COLOR[1], self)
+    rows[7][2] = Bishop.new([7, 2], COLOR[1], self)
+    rows[7][3] = King.new([7, 3], COLOR[1], self)
+    rows[7][4] = Queen.new([7, 4], COLOR[1], self)
+    rows[7][5] = Bishop.new([7, 5], COLOR[1], self)
+    rows[7][6] = Knight.new([7, 6], COLOR[1], self)
+    rows[7][7] = Rook.new([7, 7], COLOR[1], self)
   end    
     # @rows.each_with_index do |row, idx| # same each but with case statement for positions
       
