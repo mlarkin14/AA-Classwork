@@ -91,8 +91,11 @@ class Cursor
       Process.exit(0)
     end
   end
+  
 
-  def update_pos(diff)
-    @cursor_pos = diff if board.in_bounds?(diff)
+  def update_pos(diff) 
+    new_pos = @cursor_pos.map.with_index { |pos, idx| pos + diff[idx] }
+    @cursor_pos = new_pos.map { |pos| pos % board.length }  
   end
+  
 end

@@ -16,24 +16,44 @@ class Display
   #   @board.rows
 
   def render # will this render correctly?
+    # debugger
     system('clear')
-    board.rows.each do |row|
+    board.rows.each_with_index do |row, idx|
       puts ""
-      # debugger
-      row.each do |el|
+      row.each_with_index do |el, idx2|
         if el.is_a?(NullPiece)
-          print "| #{el.symbol} | "
+          if @cursor.cursor_pos == [idx, idx2]  
+            print "| #{el.symbol}| ".colorize(:green)
+          else
+            print "| #{el.symbol}| ".colorize(:red)
+          end
         else
-          print "| #{el.symbol}  | "
+          if @cursor.cursor_pos == [idx, idx2]  
+            print "| #{el.symbol} | ".colorize(:green)
+          else
+            print "| #{el.symbol} | ".colorize(:blue)
+          end
         end
       end
     end
   end
 
   def test_board # is this what you mean by looping? Small script
-    while true
+    run = true
+    while run
       self.render
       @cursor.get_input
+      puts "Enter a start pos:"
+      start_pos = gets.chomp
+      start_pos = start_pos.split("").map(&:to_i)
+      puts "Enter an end pos:"
+      end_pos = gets.chomp
+      end_pos = end_pos.split("").map(&:to_i)
+      board.move_piece(start_pos, end_pos)
+      # debugger
+      # self.render
+      # @cursor.get_input
+      # debugger
     end
   end
 
